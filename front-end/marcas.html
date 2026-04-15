@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Tienda de Ropa — Gestión de Marcas">
+    <title>Marcas | Tienda de Ropa</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<nav class="navbar">
+    <a class="navbar-brand" href="index.html">👕 Tienda de Ropa</a>
+    <div class="nav-links">
+        <a class="nav-link" href="index.html">Prendas</a>
+        <a class="nav-link active" href="marcas.html">Marcas</a>
+        <a class="nav-link" href="ventas.html">Ventas</a>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="page-header">
+        <h1>Marcas</h1>
+        <p>Administra las marcas disponibles — Total: <strong id="total-marcas">—</strong></p>
+    </div>
+
+    <div class="card">
+        <div class="toolbar" style="padding: 0.75rem 1rem; border-bottom: 1px solid #e5e7eb;">
+            <div class="search-box">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="buscador" placeholder="Buscar por nombre o país...">
+            </div>
+            <button class="btn-primary" onclick="abrirAgregar()">+ Agregar Marca</button>
+        </div>
+        <div style="overflow-x:auto;">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>País</th>
+                        <th>ID</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="marcas-tbody"></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Modal agregar/editar -->
+<div class="modal-overlay" id="modal-marca">
+    <div class="modal-box">
+        <div class="modal-header">
+            <h5 id="modal-titulo">Marca</h5>
+            <button class="btn-close-modal" onclick="closeModal('modal-marca')">✕</button>
+        </div>
+        <form id="form-marca">
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="f-nombre">Nombre de la Marca</label>
+                    <input class="form-control" type="text" id="f-nombre" placeholder="Ej: Nike" required>
+                </div>
+                <div class="form-group">
+                    <label for="f-pais">País de Origen</label>
+                    <input class="form-control" type="text" id="f-pais" placeholder="Ej: Estados Unidos" required>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-secondary" onclick="closeModal('modal-marca')">Cancelar</button>
+                <button type="submit" class="btn-primary">Guardar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Modal confirmar eliminar -->
+<div class="modal-overlay" id="modal-confirm">
+    <div class="modal-box confirm-box">
+        <div class="modal-header">
+            <h5>Confirmar eliminación</h5>
+            <button class="btn-close-modal" onclick="closeModal('modal-confirm')">✕</button>
+        </div>
+        <div class="confirm-body">
+            <div class="confirm-icon">🗑️</div>
+            <strong id="confirm-nombre"></strong>
+            <p>Esta acción no se puede deshacer.</p>
+        </div>
+        <div class="modal-footer">
+            <button class="btn-secondary" onclick="closeModal('modal-confirm')">Cancelar</button>
+            <button id="btn-confirmar-eliminar" class="btn-danger">Eliminar</button>
+        </div>
+    </div>
+</div>
+
+<div class="toast-container" id="toast-container"></div>
+
+<script src="js/api.js"></script>
+<script src="js/marcas.js"></script>
+</body>
+</html>

@@ -1,81 +1,129 @@
+# Tienda de Ropa — Proyecto Desarrollo con Plataformas Abiertas
 
+Proyecto universitario desarrollado con **MongoDB**, **Python/Flask** (API REST) y un **front-end HTML/JS/CSS** separado que consume la API mediante Ajax.
 
-##  Segunda Parte — API REST
+---
 
-La segunda parte del proyecto es una API REST construida con **Python + Flask + PyMongo**.
+## Estructura del Repositorio
 
+```
+Proyecto-Desarrollo-con-Plataformas-abiertas/
+├── API/            ← Backend Flask (API REST)
+├── scripts/        ← Scripts de base de datos
+├── front-end/      ← Front-end HTML/CSS/JS
+└── README.md
+```
 
-### Endpoints disponibles por modelo
+---
 
-#### Modelo: Usuarios
-1 Obtener todos los usuarios:
-    Método: GET
-    URL: http://127.0.0.1:5000/tienda/api/v1/usuarios
-2. Obtener usuario por ID:
-   Método: GET
-    URL: http://127.0.0.1:5000/tienda/api/v1/usuarios?id={id}
-3. Crear usuario:
-   Método: POST
-    URL: http://127.0.0.1:5000/tienda/api/v1/usuarios
-4. Actualizar usuario:
-    Método: PUT
-    URL: http://127.0.0.1:5000/tienda/api/v1/usuarios?id={id}
-5. Eliminar usuario:
-   Método: DELETE
-   URL: http://127.0.0.1:5000/tienda/api/v1/usuarios?id={id}
+## Parte I — Base de Datos
 
-#### Modelo: Marcas
-1. Obtener todas las marcas:
-   Método: GET
-   URL: http://127.0.0.1:5000/tienda/api/v1/marcas
-2. Obtener marca por ID:
-   Método: GET
-   URL: http://127.0.0.1:5000/tienda/api/v1/marcas?id={id}
-3. Crear marca:
-   Método: POST
-   URL: http://127.0.0.1:5000/tienda/api/v1/marcas
-4. Actualizar marca:
-   Método: PUT
-   URL: http://127.0.0.1:5000/tienda/api/v1/marcas?id={id}
-5. Eliminar marca:
-   Método: DELETE
-   URL: http://127.0.0.1:5000/tienda/api/v1/marcas?id={id}
+Base de datos NoSQL en **MongoDB Atlas** (`tienda_ropa`).
 
-#### Modelo: Prendas
-1. Obtener todas las prendas:
-   Método: GET
-   URL: http://127.0.0.1:5000/tienda/api/v1/prendas
-2. Obtener prenda por ID:
-   Método: GET
-   URL: http://127.0.0.1:5000/tienda/api/v1/prendas?id={id}
-3. Crear prenda:
-   Método: POST
-   URL: http://127.0.0.1:5000/tienda/api/v1/prendas
-4. Actualizar prenda:
-   Método: PUT
-   URL: http://127.0.0.1:5000/tienda/api/v1/prendas?id={id}
-5. Eliminar prenda:
-   Método: DELETE
-   URL: http://127.0.0.1:5000/tienda/api/v1/prendas?id={id}
+### Colecciones
 
-#### Modelo: Ventas
-1. Obtener todas las ventas:
-   Método: GET
-   URL: http://127.0.0.1:5000/tienda/api/v1/ventas
-2. Obtener venta por ID:
-   Método: GET
-   URL: http://127.0.0.1:5000/tienda/api/v1/ventas?id={id}
-3. Crear venta:
-   Método: POST
-   URL: http://127.0.0.1:5000/tienda/api/v1/ventas
-4. Actualizar venta:
-   Método: PUT
-   URL: http://127.0.0.1:5000/tienda/api/v1/ventas?id={id}
-5. Eliminar venta:
-   Método: DELETE
-   URL: http://127.0.0.1:5000/tienda/api/v1/ventas?id={id}
+| Colección | Campos principales |
+|-----------|-------------------|
+| `usuarios` | nombre, correo, contraseña, rol |
+| `marcas`   | nombre, pais |
+| `prendas`  | nombre, marca, precio, talla, color |
+| `ventas`   | prenda, marca, cantidad |
 
-#### Modelo: Reportes
-1. Obtener reporte de marcas con ventas:
-   Método: GET
-   URL: http://127.0.0.1:5000/tienda/api/v1/reportes/marcas-con-ventas
+### Scripts
+Los scripts de base de datos se encuentran en la carpeta `scripts/`.
+
+---
+
+## Parte II — API REST
+
+API REST construida con **Python + Flask + PyMongo** con CORS habilitado.
+
+### Instalación y Ejecución
+
+```bash
+cd API/v1
+pip install -r requirements.txt   # Si aplica
+python run.py
+```
+
+API disponible en: `http://127.0.0.1:5000`
+
+### Endpoints
+
+#### Usuarios — `/tienda/api/v1/usuarios`
+| Método | URL | Descripción |
+|--------|-----|-------------|
+| GET    | `/usuarios` | Obtener todos |
+| GET    | `/usuarios?id={id}` | Obtener por ID |
+| POST   | `/usuarios` | Crear |
+| PUT    | `/usuarios?id={id}` | Actualizar |
+| DELETE | `/usuarios?id={id}` | Eliminar |
+
+#### Marcas — `/tienda/api/v1/marcas`
+| Método | URL | Descripción |
+|--------|-----|-------------|
+| GET    | `/marcas` | Obtener todas |
+| GET    | `/marcas?id={id}` | Obtener por ID |
+| POST   | `/marcas` | Crear |
+| PUT    | `/marcas?id={id}` | Actualizar |
+| DELETE | `/marcas?id={id}` | Eliminar |
+
+#### Prendas — `/tienda/api/v1/prendas`
+| Método | URL | Descripción |
+|--------|-----|-------------|
+| GET    | `/prendas` | Obtener todas |
+| GET    | `/prendas?id={id}` | Obtener por ID |
+| POST   | `/prendas` | Crear |
+| PUT    | `/prendas?id={id}` | Actualizar |
+| DELETE | `/prendas?id={id}` | Eliminar |
+
+#### Ventas — `/tienda/api/v1/ventas`
+| Método | URL | Descripción |
+|--------|-----|-------------|
+| GET    | `/ventas` | Obtener todas |
+| GET    | `/ventas?id={id}` | Obtener por ID |
+| POST   | `/ventas` | Registrar |
+| PUT    | `/ventas?id={id}` | Actualizar |
+| DELETE | `/ventas?id={id}` | Eliminar |
+
+#### Reportes — `/tienda/api/v1/reportes`
+| Método | URL | Descripción |
+|--------|-----|-------------|
+| GET    | `/reportes/marcas-con-ventas` | Marcas con mayor volumen de ventas |
+
+---
+
+## Parte III — Front-end
+
+Front-end **completamente separado** de la API, construido con HTML5, CSS3 y JavaScript vanilla con **Ajax (fetch API)**.
+
+### Estructura
+
+```
+front-end/
+├── index.html      ← Gestión de Prendas (pantalla principal)
+├── marcas.html     ← Gestión de Marcas
+├── ventas.html     ← Gestión de Ventas
+├── css/
+│   └── styles.css  ← Estilos (tema oscuro, glassmorphism, Inter font)
+└── js/
+    ├── api.js      ← Funciones Ajax centralizadas (GET/POST/PUT/DELETE)
+    ├── prendas.js  ← CRUD de Prendas
+    ├── marcas.js   ← CRUD de Marcas
+    └── ventas.js   ← CRUD de Ventas
+```
+
+### Cómo usar
+
+1. Asegurarse de que la API esté corriendo en `http://127.0.0.1:5000`
+2. Abrir `front-end/index.html` directamente en el navegador
+
+### Funcionalidades
+
+- ✅ Listado de registros en tabla con búsqueda en tiempo real
+- ✅ Agregar nuevos registros mediante modal con formulario
+- ✅ Editar registros existentes (modal prellenado)
+- ✅ Eliminar registros con ventana de confirmación
+- ✅ Notificaciones toast de éxito/error tras cada operación
+- ✅ Diseño responsive (mobile-first)
+- ✅ Todas las peticiones realizadas con Ajax (`fetch` API)

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Tienda de Ropa — Gestión de Ventas">
+    <title>Ventas | Tienda de Ropa</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<nav class="navbar">
+    <a class="navbar-brand" href="index.html">👕 Tienda de Ropa</a>
+    <div class="nav-links">
+        <a class="nav-link" href="index.html">Prendas</a>
+        <a class="nav-link" href="marcas.html">Marcas</a>
+        <a class="nav-link active" href="ventas.html">Ventas</a>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="page-header">
+        <h1>Ventas</h1>
+        <p>Registro de transacciones de venta — Total: <strong id="total-ventas">—</strong></p>
+    </div>
+
+    <div class="card">
+        <div class="toolbar" style="padding: 0.75rem 1rem; border-bottom: 1px solid #e5e7eb;">
+            <div class="search-box">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="buscador" placeholder="Buscar por prenda o marca...">
+            </div>
+            <button class="btn-primary" onclick="abrirAgregar()">+ Registrar Venta</button>
+        </div>
+        <div style="overflow-x:auto;">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Prenda</th>
+                        <th>Marca</th>
+                        <th>Cantidad</th>
+                        <th>ID</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="ventas-tbody"></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Modal agregar/editar -->
+<div class="modal-overlay" id="modal-venta">
+    <div class="modal-box">
+        <div class="modal-header">
+            <h5 id="modal-titulo">Venta</h5>
+            <button class="btn-close-modal" onclick="closeModal('modal-venta')">✕</button>
+        </div>
+        <form id="form-venta">
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="f-prenda">Nombre de la Prenda</label>
+                    <input class="form-control" type="text" id="f-prenda" placeholder="Ej: Camiseta básica" required>
+                </div>
+                <div class="form-group">
+                    <label for="f-marca">Marca</label>
+                    <input class="form-control" type="text" id="f-marca" placeholder="Ej: Nike" required>
+                </div>
+                <div class="form-group">
+                    <label for="f-cantidad">Cantidad</label>
+                    <input class="form-control" type="number" id="f-cantidad" placeholder="Ej: 2" min="1" required>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-secondary" onclick="closeModal('modal-venta')">Cancelar</button>
+                <button type="submit" class="btn-primary">Guardar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Modal confirmar eliminar -->
+<div class="modal-overlay" id="modal-confirm">
+    <div class="modal-box confirm-box">
+        <div class="modal-header">
+            <h5>Confirmar eliminación</h5>
+            <button class="btn-close-modal" onclick="closeModal('modal-confirm')">✕</button>
+        </div>
+        <div class="confirm-body">
+            <div class="confirm-icon">🗑️</div>
+            <strong id="confirm-nombre"></strong>
+            <p>Esta acción no se puede deshacer.</p>
+        </div>
+        <div class="modal-footer">
+            <button class="btn-secondary" onclick="closeModal('modal-confirm')">Cancelar</button>
+            <button id="btn-confirmar-eliminar" class="btn-danger">Eliminar</button>
+        </div>
+    </div>
+</div>
+
+<div class="toast-container" id="toast-container"></div>
+
+<script src="js/api.js"></script>
+<script src="js/ventas.js"></script>
+</body>
+</html>
